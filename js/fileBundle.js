@@ -1,4 +1,4 @@
-IBSYS.FileBundle = function(files, callback) {
+SENTIENTBIT.FileBundle = function(files, callback) {
 	
 // private variables
 

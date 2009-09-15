@@ -1,6 +1,6 @@
-IBSYS = {};
+SENTIENTBIT = {};
 
-IBSYS.getScriptManager = (function() {
+SENTIENTBIT.getScriptManager = (function() {
 
 // private variables
 
@@ -16,11 +16,11 @@ IBSYS.getScriptManager = (function() {
 	function bundleFiles(fileNames, callback) {
 		var array = [];
 		for (name in fileNames) {
-			var newFile = new IBSYS.File(fileNames[name]);	// Creating a new File object
+			var newFile = new SENTIENTBIT.File(fileNames[name]);	// Creating a new File object
 			var newFile  = addFileToMasterList(newFile); // newFile is replaced with file object in masterList if it's in the masterList.
 			array.push(newFile);
 		}
-		var bundle = new IBSYS.FileBundle(array, callback);
+		var bundle = new SENTIENTBIT.FileBundle(array, callback);
 		// !To Do: Subscribe onto the bundle a listener(statusUpdated) for the file that is being added.
 		bundleArray.push(bundle);
 	};

@@ -1,4 +1,4 @@
-IBSYS.File = function(fileName, newStatus) {
+SENTIENTBIT.File = function(fileName, newStatus) {
 	
 // private variables
 	
