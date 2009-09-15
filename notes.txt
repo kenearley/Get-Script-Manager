@@ -1,0 +1,44 @@
+Files
+
+getScriptManager
+file.js
+fileBundle.js
+
+
+Description:
+
+- First it gets a request for files: an array of file paths and a callback function.
+- then it bundles the files and adds the file to the master list if it's not already on the master list.
+- At this point, each file has been made into an IBSYS.File object and the reference in the bundle and master list point to the same object.
+- As it adds to the master list, it makes the YUI Get Utility call and passes the File objects updateStatus method as a callback method.
+- As it adds to the bundle, it subscribes the bundle to listen to it's files' statusUpdated event call.
+- Each time a bundle 'receives' an updateStatus event call, it checks to see if the status of all it's files are 'success'. If so, it triggers the original callback method.
+
+
+Notes:
+
+- The File object in the masterList is the same File object in each of the bundles that it may be referenced in.
+	-- That's why when there is already a file in the master list, that is what is returned to be put in the bundle.
+
+- Each bundle subscribes to each of the instances of the File object it has stored.
+	-- When the masterList gets back a file and calls the updateStatus method for that File object, it will in turn fire a statusUpdated event.
+	-- Since each bundle with that particular File object is listening, it will then check it's own status by checking the status of each of it's files.
+	-- At that time, it will fire the original callback function.
+
+- Since it is possible that a newly created bundled has all loaded files, it will do a check on the status immediately after loading. If so, the callback will fire. 
+
+
+Next Steps:
+
+1. Handle failure of bundle/collection
+2. Pass in scope for callback
+3. Handle css files
+4. How do we handle css/js files if passed within the same call?
+5. Account for FF2.x - 
+6. Make getScriptManager.js a singleton
+7. Should this be library agnostic?
+8. File collection should be a hash instead of an array.
+9. Replace YUI custom events with IBSYS custom event
+10.Should we have it request un-minified files in dev-dot?
+11.Should we do unit tests? YUI or JSUnit?
+12.Account for loading in sequence.
